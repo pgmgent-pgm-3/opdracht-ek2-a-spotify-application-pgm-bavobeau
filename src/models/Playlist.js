@@ -26,12 +26,11 @@ export default new EntitySchema({
       onDelete: "CASCADE"
     },
     songs: {
-      target: "Playlist",
+      target: "Song",
       type: "many-to-many",
       joinTable: {
-        name: "playlists_songs"
+        name: "playlists_songs",
       },
-      cascade: true
-    }
+    },
   },
 });

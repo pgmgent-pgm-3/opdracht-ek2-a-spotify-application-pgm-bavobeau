@@ -29,8 +29,9 @@ export default new EntitySchema({
       target: "Playlist",
       type: "many-to-many",
       joinTable: {
-        name: "playlists_songs"
+        name: "playlists_songs",
       },
-    }
+      cascade: true,
+    },
   },
 });
