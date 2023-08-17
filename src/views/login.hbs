@@ -1,0 +1,14 @@
+<section class="auth login">
+    <h2>Login</h2>
+    <p>Or, <a href="/register">register</a></p>
+    {{>form-errors this}}
+    <form method="post" action="/api/login">
+        {{#each inputs}}
+            {{>form-input this}}
+        {{/each}}
+        <div class="footer-container">
+            <input type="reset" class="btn" value="Clear">
+            <input type="submit" class="btn" value="Login">
+        </div>
+    </form>
+</section>

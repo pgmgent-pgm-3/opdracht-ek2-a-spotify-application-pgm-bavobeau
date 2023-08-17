@@ -1,0 +1,13 @@
+<section class="auth register">
+    <h2>Register</h2>
+    {{>form-errors this}}
+    <form method="post" action="/api/register">
+        {{#each inputs}}
+            {{>form-input this}}
+        {{/each}}
+        <div class="footer-container">
+            <input type="reset" class="btn" value="Clear">
+            <input type="submit" class="btn" value="Register">
+        </div>
+    </form>
+</section>
