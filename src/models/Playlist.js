@@ -3,41 +3,34 @@ import typeorm from "typeorm";
 const { EntitySchema } = typeorm;
 
 export default new EntitySchema({
-  name: "User",
-  tableName: "users",
+  name: "Playlist",
+  tableName: "playlists",
   columns: {
     id: {
       primary: true,
       type: "int",
       generated: true,
     },
-    email: {
+    name: {
       type: "varchar",
-    },
-    password: {
-      type: "varchar",
-    },
+    }
   },
   relations: {
-    meta: {
-      target: "UserMeta",
+    user: {
+      target: "User",
       type: "one-to-one",
-      inverseSide: "user",
-      cascade: true
-    },
-    role: {
-      target: "Role",
-      type: "many-to-one",
-      inverseSide: "users",
+      inverseSide: "playlist",
       joinColumn: {
-        name: "role_id"
+        name: "user_id"
       },
       onDelete: "CASCADE"
     },
-    playlist: {
+    songs: {
       target: "Playlist",
-      type: "one-to-one",
-      inverseSide: "user",
+      type: "many-to-many",
+      joinTable: {
+        name: "playlists_songs"
+      },
       cascade: true
     }
   },
