@@ -1,7 +1,7 @@
 import { DataSource } from "typeorm";
 
 // import all entities
-import { entities } from "../models";
+import entities from "../models/index.js";
 
 
 const DS = new DataSource({

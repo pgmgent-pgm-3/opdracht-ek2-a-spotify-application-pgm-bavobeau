@@ -15,16 +15,19 @@ import HandlebarsHelpers from "./lib/HandlebarsHelpers.js";
 import DataSource from "./lib/DataSource.js";
 
 // import controllers
-import { home } from "./controllers/home.js";
+import { home } from "./controllers/index.js";
+
+// import api endpoints
 import { login, register, logout, postLogin, postRegister } from "./controllers/api/authentication.js";
-
-// import api controllers
-
+import { getUser, getUsers, deleteUser } from "./controllers/api/user.js";
+import { getArtist, getArtists, postArtist, updateArtist, deleteArtist } from "./controllers/api/artist.js";
+import { getSong, getSongs, postSong, updateSong, deleteSong } from "./controllers/api/song.js";
 
 // import middleware
 import registerAuthentication from "./middleware/validation/registerAuthentication.js";
 import loginAuthentication from "./middleware/validation/loginAuthentication.js";
 import { jwtAuth } from "./middleware/jwtAuth.js";
+import { authorizeAdmin, authorizeEditor } from "./middleware/authorize.js"
 
 // initialize express
 const app = express();
@@ -62,8 +65,24 @@ app.post("/api/register", registerAuthentication, postRegister, register);
 app.post("/api/login", loginAuthentication, postLogin, login);
 app.get("/logout", logout);
 
-// add routes
+// user routes
+app.get("/api/users", jwtAuth, authorizeAdmin, getUsers);
+app.get("/api/user/:id", jwtAuth, authorizeAdmin, getUser);
+app.delete("/api/user/:id", jwtAuth, authorizeAdmin, deleteUser);
 
+// artist routes
+app.get("/api/artists", getArtists);
+app.get("/api/artist/:id", getArtist);
+app.post("/api/artist", jwtAuth, authorizeAdmin, postArtist);
+app.put("/api/artist", jwtAuth, authorizeEditor, updateArtist);
+app.delete("/api/artist", jwtAuth, authorizeAdmin, deleteArtist);
+
+// song routes
+app.get("/api/songs", getSongs);
+app.get("/api/song/:id", getSong);
+app.post("/api/song", postSong);
+app.put("/api/song", updateSong);
+app.delete("/api/song", deleteSong);
 
 // define port, use 3000 if no env variable is set
 const port = process.env.PORT || 3000;
@@ -72,7 +91,7 @@ const port = process.env.PORT || 3000;
 DataSource.initialize()
   .then(() => {
     app.listen(port, () => {
-      console.log(`Server started at port ${port}`);
+      console.log(`Server started at http://localhost:${port}.`);
     });
   })
   .catch(function (error) {

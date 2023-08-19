@@ -1,7 +1,7 @@
 export const authorizeAdmin = async (req, res, next) => {
   try {
-    const userRole = req.user.role.label;
-    if (userRole === "admin") {
+    const userRole = req.user.role.id;
+    if (userRole === 1) {
       return next();
     }
     throw new Error("You are not authorized to view this page")
@@ -10,10 +10,10 @@ export const authorizeAdmin = async (req, res, next) => {
   }
 };
 
-export const authorizeInfluencer = async (req, res, next) => {
+export const authorizeEditor = async (req, res, next) => {
   try {
     const userRole = req.user.role.id;
-    if (userRole >= 2) {
+    if (userRole <= 2) {
       return next();
     }
     throw new Error("You are not authorized to view this page")

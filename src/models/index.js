@@ -11,4 +11,4 @@ import UserMeta from "../models/UserMeta.js";
 const entities = [Album, Artist, Playlist, Role, Song, User, UserMeta];
 
 // export all entities
-export default entities
+export default entities;

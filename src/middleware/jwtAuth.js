@@ -6,10 +6,15 @@ export const jwtAuth = async (req, res, next) => {
 
   try {
     const { id } = jwt.verify(token, process.env.TOKEN_SALT);
-
+    
     const userRepo = DS.getRepository("User");
-    const user = await userRepo.findOne({ where: { id } });
-
+    const user = await userRepo.findOne({ 
+      relations: ["role"], 
+      where: { 
+          id
+      }
+    });
+    
     user.password = "";
     req.user = user;
 

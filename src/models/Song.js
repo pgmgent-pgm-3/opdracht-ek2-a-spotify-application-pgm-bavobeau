@@ -21,7 +21,7 @@ export default new EntitySchema({
       type: "one-to-one",
       inverseSide: "song",
       joinColumn: {
-        name: "song_id"
+        name: "artist_id"
       },
       onDelete: "CASCADE"
     },

@@ -108,7 +108,9 @@ export const postRegister = async (req, res, next) => {
       const user = await userRepo.create({
         email: req.body.email,
         password: hashedPassword,
-        role: 1
+        role: {
+          id: 3
+        }
       });
 
       // save the user
