@@ -23,6 +23,7 @@ import { getUser, getUsers, deleteUser } from "./controllers/api/user.js";
 import { getArtist, getArtists, postArtist, updateArtist, deleteArtist } from "./controllers/api/artist.js";
 import { getSong, getSongs, postSong, updateSong, deleteSong } from "./controllers/api/song.js";
 import { getAlbum, getAlbums, postAlbum, updateAlbum, deleteAlbum } from "./controllers/api/album.js";
+import { getPlaylist, getPlaylists, getPlaylistsByUserId, postPlaylist, postSongToPlaylist, updatePlaylist, deletePlaylist } from "./controllers/api/playlist.js";
 
 // import middleware
 import registerAuthentication from "./middleware/validation/registerAuthentication.js";
@@ -91,6 +92,15 @@ app.get("/api/album/:id", getAlbum);
 app.post("/api/album", postAlbum);
 app.put("/api/album", updateAlbum);
 app.delete("/api/album", deleteAlbum);
+
+// playlist routes need to be tested
+app.get("/api/playlists", getPlaylists);
+app.get("/api/playlist/:id", getPlaylist);
+app.get("/api/playlists/:userId", getPlaylistsByUserId);
+app.post("/api/playlist", postPlaylist);
+app.post("/api/playlist/addSong", postSongToPlaylist);
+app.put("/api/playlist", updatePlaylist);
+app.delete("/api/playlist", deletePlaylist);
 
 // define port, use 3000 if no env variable is set
 const port = process.env.PORT || 3000;
