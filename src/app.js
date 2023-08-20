@@ -22,6 +22,7 @@ import { login, register, logout, postLogin, postRegister } from "./controllers/
 import { getUser, getUsers, deleteUser } from "./controllers/api/user.js";
 import { getArtist, getArtists, postArtist, updateArtist, deleteArtist } from "./controllers/api/artist.js";
 import { getSong, getSongs, postSong, updateSong, deleteSong } from "./controllers/api/song.js";
+import { getAlbum, getAlbums, postAlbum, updateAlbum, deleteAlbum } from "./controllers/api/album.js";
 
 // import middleware
 import registerAuthentication from "./middleware/validation/registerAuthentication.js";
@@ -80,9 +81,16 @@ app.delete("/api/artist", jwtAuth, authorizeAdmin, deleteArtist);
 // song routes
 app.get("/api/songs", getSongs);
 app.get("/api/song/:id", getSong);
-app.post("/api/song", postSong);
-app.put("/api/song", updateSong);
-app.delete("/api/song", deleteSong);
+app.post("/api/song", jwtAuth, authorizeAdmin, postSong);
+app.put("/api/song", jwtAuth, authorizeEditor, updateSong); 
+app.delete("/api/song", jwtAuth, authorizeAdmin, deleteSong); 
+
+// album routes need to be tested
+app.get("/api/albums", getAlbums);
+app.get("/api/album/:id", getAlbum);
+app.post("/api/album", postAlbum);
+app.put("/api/album", updateAlbum);
+app.delete("/api/album", deleteAlbum);
 
 // define port, use 3000 if no env variable is set
 const port = process.env.PORT || 3000;

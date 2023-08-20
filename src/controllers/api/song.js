@@ -79,22 +79,13 @@ export const updateSong = async (req, res, next) => {
       id,
     });
 
-    // make new object
-    const newSong = {
-      id,
-      name: req.body.name,
-      artist: {
-        id: req.body.artist.id,
-      },
-    };
-
     // if song exists update it
     if (song && id !== undefined) {
-      await songRepo.save(newSong);
+      await songRepo.save(req.body);
 
       res.status(200).json({
         status: "Song successfully updated.",
-        artist: newSong,
+        song: req.body,
       });
 
       //if song doesn't exist stop
