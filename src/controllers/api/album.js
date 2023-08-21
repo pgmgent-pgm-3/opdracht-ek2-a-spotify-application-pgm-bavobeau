@@ -109,15 +109,19 @@ export const deleteAlbum = async (req, res, next) => {
     const album = await albumRepo.findOneBy({ id });
 
     // if album exists
-    if (album) {
+    if (album != null && id != undefined) {
       // remove album
       await albumRepo.delete(album);
+      
+      // return success code
+      res.status(204).json({
+        status: "album successfully deleted.",
+      });
+    } else {
+      res.status(404).json({
+        status: "album to delete not found.",
+      });
     }
-
-    // return success code
-    res.status(204).json({
-      status: "album successfully deleted.",
-    });
   } catch (e) {
     res.status(500).json({
       status: "Failed to delete album.",

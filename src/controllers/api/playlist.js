@@ -22,7 +22,9 @@ export const getPlaylist = async (req, res, next) => {
 export const getPlaylists = async (req, res, next) => {
   try {
     const playlistRepo = DS.getRepository("Playlist");
-    const playlists = await playlistRepo.find();
+    const playlists = await playlistRepo.find({
+      relations: ["songs"]
+    });
     res.status(200).json(playlists);
   } catch (e) {
     res.status(500).json({
@@ -43,10 +45,16 @@ export const getPlaylistsByUserId = async (req, res, next) => {
         }
       }
     });
-    res.status(200).json(playlists);
+    if (playlists && userId != null) {
+      res.status(200).json(playlists);
+    } else {
+      res.status(404).json({
+        status: "playlists not found.",
+      });
+    }
   } catch (e) {
     res.status(500).json({
-      status: "Failed to get playlists",
+      status: "Failed to get playlists.",
     });
   }
 };
@@ -89,7 +97,35 @@ export const postPlaylist = async (req, res, next) => {
 export const postSongToPlaylist = async (req, res, next) => {
   try {
     const playlistRepo = DS.getRepository("Playlist");
+    const songRepo = DS.getRepository("Song");
 
+    const { id } = req.body;
+    const songId = req.body.songs.id;
+    // look if playlist already exists in repo
+    const playlist = await playlistRepo.findOne({
+      relations: ["songs"],
+      where: {
+        id
+      },
+    });
+    
+    const song = await songRepo.findOneBy({
+      id: songId
+    })
+
+    const updatedSongs = [].concat(playlist.songs, song);
+    playlist.songs = updatedSongs;
+    if (playlist && song) {
+      
+      await playlistRepo.save(playlist);
+      res.status(200).json({
+        status: "saved song to playlist."
+      });
+    } else {
+      res.status(400).json({
+        status: "song or playlist not found."
+      });
+    }
   } catch (e) {
     res.status(500).json({
       status: "Failed to add song to playlist.",
@@ -140,15 +176,19 @@ export const deletePlaylist = async (req, res, next) => {
     const playlist = await playlistRepo.findOneBy({ id });
 
     // if playlist exists
-    if (playlist) {
+    if (playlist != null && id != undefined) {
       // remove playlist
       await playlistRepo.delete(playlist);
+      
+      // return success code
+      res.status(204).json({
+        status: "playlist successfully deleted.",
+      });
+    } else {
+      res.status(404).json({
+        status: "playlist to delete not found.",
+      });
     }
-
-    // return success code
-    res.status(204).json({
-      status: "playlist successfully deleted.",
-    });
   } catch (e) {
     res.status(500).json({
       status: "Failed to delete playlist.",

@@ -86,21 +86,21 @@ app.post("/api/song", jwtAuth, authorizeAdmin, postSong);
 app.put("/api/song", jwtAuth, authorizeEditor, updateSong); 
 app.delete("/api/song", jwtAuth, authorizeAdmin, deleteSong); 
 
-// album routes need to be tested
+// album routes
 app.get("/api/albums", getAlbums);
 app.get("/api/album/:id", getAlbum);
-app.post("/api/album", postAlbum);
-app.put("/api/album", updateAlbum);
-app.delete("/api/album", deleteAlbum);
+app.post("/api/album", jwtAuth, authorizeAdmin, postAlbum);
+app.put("/api/album", jwtAuth, authorizeEditor, updateAlbum);
+app.delete("/api/album", jwtAuth, authorizeAdmin, deleteAlbum);
 
-// playlist routes need to be tested
+// playlist routes
 app.get("/api/playlists", getPlaylists);
 app.get("/api/playlist/:id", getPlaylist);
 app.get("/api/playlists/:userId", getPlaylistsByUserId);
-app.post("/api/playlist", postPlaylist);
-app.post("/api/playlist/addSong", postSongToPlaylist);
-app.put("/api/playlist", updatePlaylist);
-app.delete("/api/playlist", deletePlaylist);
+app.post("/api/playlist", jwtAuth, authorizeAdmin, postPlaylist);
+app.post("/api/playlist/addSong", jwtAuth, authorizeAdmin, postSongToPlaylist);
+app.put("/api/playlist", jwtAuth, authorizeEditor, updatePlaylist);
+app.delete("/api/playlist", jwtAuth, authorizeAdmin, deletePlaylist);
 
 // define port, use 3000 if no env variable is set
 const port = process.env.PORT || 3000;
