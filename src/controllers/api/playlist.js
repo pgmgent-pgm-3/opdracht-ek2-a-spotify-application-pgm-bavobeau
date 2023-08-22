@@ -67,27 +67,30 @@ export const postPlaylist = async (req, res, next) => {
     const playlist = await playlistRepo.findOne({
       where: {
         name: req.body.name,
+        user: {id: req.user.id}
       },
     });
-
+    console.log(playlist)
     // if playlists exists stop and return existing playlist
     if (playlist) {
-      res.status(400).json({
+      res.status(200).json({
         status: "playlist already exists in database.",
         playlist: playlist,
       });
 
       // if playlist doesn't exist add it to database
     } else {
-      await playlistRepo.save(req.body);
 
-      //return succes code with new playlist
-      res.status(201).json({
-        status: "New playlist successfully added.",
-        playlist: req.body,
+      await playlistRepo.save({
+        ...req.body,
+        user: {id: req.user.id}
       });
+
+      // Redirect back to the same page if success
+      return res.redirect(req.get('referer'));
     }
   } catch (e) {
+    console.error("Error creating playlist:", e);
     res.status(500).json({
       status: "Failed to create new playlist.",
     });

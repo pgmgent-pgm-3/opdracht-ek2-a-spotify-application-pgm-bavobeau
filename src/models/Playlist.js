@@ -18,12 +18,12 @@ export default new EntitySchema({
   relations: {
     user: {
       target: "User",
-      type: "one-to-one",
-      inverseSide: "playlist",
+      type: "many-to-one",
+      inverseSide: "playlists",
       joinColumn: {
         name: "user_id"
       },
-      onDelete: "CASCADE"
+      cascade: true,
     },
     songs: {
       target: "Song",

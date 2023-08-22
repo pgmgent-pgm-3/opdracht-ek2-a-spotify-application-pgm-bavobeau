@@ -1,0 +1,30 @@
+<div class="sidebar">
+  <nav>
+    <ul class="nav__list">
+      {{#each data.nav }}
+        <li class="nav__item">
+          <a class="nav__link" href="{{ url }}">
+            <img class="nav__icon" src="img/icons/{{ name }}.png" alt="{{ name }}">
+            {{ name }}
+          </a>
+        </li>
+      {{/each}}
+    </ul>
+  </nav>
+  {{#if (isEqual user.role.id 1)}}
+  <div class="">
+    <h4>Create Playlist</h4>
+    <form action="/api/playlist" method="post">
+      <input type="text" name="name">
+      <input type="submit">
+    </form>
+  </div>
+  {{/if}}
+  <ul class="sidebar__playlists">
+    {{#each playlists }}
+      <li>
+        <a class="" href="playlists/{{id}}">{{ name }}</a>
+      </li>
+    {{/each}}
+  </ul>
+</div>

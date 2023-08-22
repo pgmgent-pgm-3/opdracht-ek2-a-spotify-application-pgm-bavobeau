@@ -34,11 +34,10 @@ export default new EntitySchema({
       },
       onDelete: "CASCADE"
     },
-    playlist: {
+    playlists: {
       target: "Playlist",
-      type: "one-to-one",
+      type: "one-to-many",
       inverseSide: "user",
-      cascade: true
     }
   },
 });

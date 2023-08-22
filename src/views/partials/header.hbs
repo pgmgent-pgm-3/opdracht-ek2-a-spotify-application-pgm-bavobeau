@@ -1,0 +1,17 @@
+<div class="header">
+  <div class="header__left">
+    <button class="button button--round button--back" onClick="previous()" id="backward"></button>
+    <button class="button button--round button--forward" onclick="next()" id="forward"></button>
+  </div>
+
+  <div class="header__right">
+    <p>{{ user.role.label }} {{user.meta.username }}</p>
+    <a class="user" href="/user">
+      {{#if user.meta.avatar }}
+        <img class="user__avatar" src="img/avatars/{{user.meta.avatar}}" alt="avatar of user">
+      {{else}}
+        <img class="user__avatar" src="https://ui-avatars.com/api/?name={{ user.meta.firstname }}+{{ user.meta.lastname }}" alt="avatar of user">
+      {{/if}}
+    </a>
+  </div>
+</div>

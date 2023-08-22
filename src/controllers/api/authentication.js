@@ -149,7 +149,7 @@ export const register = async (req, res) => {
 
   // render register page
   res.render("register", {
-    layout: "main",
+    layout: "authentication",
     formErrors,
     inputs,
   });
@@ -181,7 +181,7 @@ export const login = async (req, res) => {
 
   // render login page
   res.render("login", {
-    layout: "main",
+    layout: "authentication",
     formErrors,
     inputs,
   });
