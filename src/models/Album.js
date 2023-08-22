@@ -22,7 +22,6 @@ export default new EntitySchema({
       joinColumn: {
         name: "artist_id"
       },
-      onDelete: "CASCADE"
     }
   },
 });

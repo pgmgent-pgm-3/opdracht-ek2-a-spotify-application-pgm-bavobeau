@@ -32,6 +32,7 @@ export const artist = async (req, res) => {
   const artistRepo = DS.getRepository("Artist");
   const playlistRepo = DS.getRepository("Playlist");
   const songRepo = DS.getRepository("Song");
+  const albumRepo = DS.getRepository("Album");
     
   // haal alle items op
   const artist = await artistRepo.findOneBy({id});
@@ -44,6 +45,14 @@ export const artist = async (req, res) => {
       }
     }
   });
+  const albums = await albumRepo.find({
+    relations: ["artist"],
+    where: {
+      artist: {
+        id
+      }
+    }
+  })
   
   res.render("artist", {
     user: req.user,
@@ -51,5 +60,6 @@ export const artist = async (req, res) => {
     artist,
     playlists,
     songs,
+    albums
   })
 }

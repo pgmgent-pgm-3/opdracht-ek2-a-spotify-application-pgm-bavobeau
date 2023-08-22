@@ -18,12 +18,38 @@ function deleteSongFromPlaylist(songId, playlistId) {
 }
 
 function deleteArtist(id) {
+  const data = {
+    id: id
+  }
   fetch("/api/artist", {
     method: "delete",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data)
   })
   .then((res) => {
     if(res.ok) {
       window.location.href = "/artists";
+    }
+  })
+  .catch((e) => console.log(e));
+}
+
+function deleteAlbum(id) {
+  const data = {
+    id: id
+  }
+  fetch("/api/album", {
+    method: "delete",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data)
+  })
+  .then((res) => {
+    if(res.ok) {
+      window.location.reload();
     }
   })
   .catch((e) => console.log(e));

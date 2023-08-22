@@ -65,12 +65,7 @@ export const postSong = async (req, res, next) => {
         }
       });
 
-      //return success code
-      res.status(201).json({
-        status: "New song successfully added.",
-        song: req.body.name,
-        artist_id: req.body.artist_id,
-      });
+      return res.redirect(req.get('referer'));
     }
   } catch (e) {
     res.status(500).json({

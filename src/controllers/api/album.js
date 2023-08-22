@@ -37,9 +37,13 @@ export const postAlbum = async (req, res, next) => {
 
     // look if album already exists in repo
     const album = await albumRepo.findOne({
+      relations: ["artist"],
       where: {
         name: req.body.name,
-      },
+        artist: {
+          id: req.body.artist_id
+        }
+      }
     });
 
     // if albums exists stop and return existing album
@@ -51,13 +55,14 @@ export const postAlbum = async (req, res, next) => {
 
       // if album doesn't exist add it to database
     } else {
-      await albumRepo.save(req.body);
-
-      //return succes code with new album
-      res.status(201).json({
-        status: "New album successfully added.",
-        album: req.body,
+      await albumRepo.save({
+        name: req.body.name,
+        artist: {
+          id: req.body.artist_id
+        }
       });
+
+      return res.redirect(req.get('referer'));
     }
   } catch (e) {
     res.status(500).json({
@@ -105,7 +110,6 @@ export const deleteAlbum = async (req, res, next) => {
     const albumRepo = DS.getRepository("Album");
 
     const { id } = req.body;
-
     const album = await albumRepo.findOneBy({ id });
 
     // if album exists

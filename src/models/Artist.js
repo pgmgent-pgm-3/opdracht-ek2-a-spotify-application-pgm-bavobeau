@@ -20,13 +20,13 @@ export default new EntitySchema({
       target: "Album",
       type: "one-to-many",
       inverseSide: "artist",
-      cascade: true
+      onDelete: "CASCADE"
     },
     songs: {
       target: "Song",
       type: "one-to-many",
       inverseSide: "artist",
-      cascade: true
+      onDelete: "CASCADE"
     }
   },
 });

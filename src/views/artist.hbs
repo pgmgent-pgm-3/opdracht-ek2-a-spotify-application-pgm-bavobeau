@@ -1,13 +1,22 @@
-<section>
-  <h1>{{ artist.name }}</h1>
-  <ul class="songs songs--playlist">
-    <li class="song song--title">
+<h1>{{ artist.name }}</h1>
+<section class="artist__albums">
+  <ul class="list list--album">
+    <li class="list__item list__item--album">
       <h4>Title</h4>
-      <h4>Artist</h4>
+    </li>
+    {{#each albums}}
+      {{> album role_id=../user.role.id }}
+    {{/each}}
+  </ul>
+</section>
+<section class="artist__songs">
+  <ul class="list list--songs">
+    <li class="list__item list__item--song list__item--title">
+      <h4>Title</h4>
       <h4>Duration</h4>
     </li>
     {{#each songs }}
-      {{> song role_id=../user.role.id playlist_id=../playlist.id }}
+      {{> song role_id=../user.role.id }}
     {{/each}}
   </ul>
 </section>
@@ -25,7 +34,7 @@
       <input type="submit">
     </form>
   <h3>Delete Artist</h3>
-      <button class="button__function button__function--red button__function--icon" onClick="deleteArtist({{artist.id}})">
-        <img src="/img/icons/delete.svg" alt="trashcan">
-      </button>
+    <button class="button__function button__function--red button__function--icon" onClick="deleteArtist({{artist.id}})">
+      <img src="/img/icons/delete.svg" alt="trashcan">
+    </button>
 </section>

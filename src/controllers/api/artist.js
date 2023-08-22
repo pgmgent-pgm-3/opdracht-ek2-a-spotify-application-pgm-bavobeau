@@ -53,11 +53,7 @@ export const postArtist = async (req, res, next) => {
     } else {
       await artistRepo.save(req.body);
 
-      //return succes code with new artist
-      res.status(201).json({
-        status: "New artist successfully added.",
-        artist: req.body,
-      });
+      return res.redirect(req.get('referer'));
     }
   } catch (e) {
     res.status(500).json({
