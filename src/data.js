@@ -12,6 +12,10 @@ export default {
       name: "Playlists",
       url: "/playlists",
       target: "_self"
+    },{
+      name: "Logout",
+      url: "/logout",
+      target: "_self"
     },
   ]
 }

@@ -24,7 +24,9 @@
   </ul>
   {{/if}}
 </section>
+  {{#if (isEqual user.role.id 1)}}
   <h3>Delete Playlist</h3>
     <button class="button__function button__function--red button__function--icon" onClick="deletePlaylist({{id}})">
       <img src="/img/icons/delete.svg" alt="trashcan">
     </button>
+  {{/if}}

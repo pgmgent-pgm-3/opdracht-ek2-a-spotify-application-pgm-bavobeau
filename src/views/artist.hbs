@@ -33,8 +33,10 @@
       <input type="text" name="artist_id" value="{{artist.id}}">
       <input type="submit">
     </form>
+  {{#if (isEqual user.role.id 1)}}
   <h3>Delete Artist</h3>
     <button class="button__function button__function--red button__function--icon" onClick="deleteArtist({{artist.id}})">
       <img src="/img/icons/delete.svg" alt="trashcan">
     </button>
+  {{/if}}
 </section>

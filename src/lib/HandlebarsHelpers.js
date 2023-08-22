@@ -13,6 +13,13 @@ export default {
     }
     return false
   },
+
+  isSmall: (a, b) => {
+    if (a <= b) {
+      return true
+    }
+    return false
+  },
   
   isNotEqual: (data, nr) => {
     if (data === nr) {
