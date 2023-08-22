@@ -6,7 +6,7 @@
 
   <div class="header__right">
     <p>{{ user.role.label }} {{user.meta.username }}</p>
-    <a class="user" href="/user">
+    <a class="user" href="/user/{{user.id}}">
       {{#if user.meta.avatar }}
         <img class="user__avatar" src="img/avatars/{{user.meta.avatar}}" alt="avatar of user">
       {{else}}

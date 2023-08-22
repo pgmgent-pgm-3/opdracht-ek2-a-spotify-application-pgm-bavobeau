@@ -15,7 +15,7 @@ import HandlebarsHelpers from "./lib/HandlebarsHelpers.js";
 import DataSource from "./lib/DataSource.js";
 
 // import controllers
-import { home, playlists, playlist, artists, artist } from "./controllers/index.js";
+import { home, playlists, playlist, artists, artist, user } from "./controllers/index.js";
 
 // import api endpoints
 import { login, register, logout, postLogin, postRegister } from "./controllers/api/authentication.js";
@@ -72,6 +72,7 @@ app.get("/playlists", jwtAuth, playlists)
 app.get("/playlists/:id", jwtAuth, playlist)
 app.get("/artists", jwtAuth, artists)
 app.get("/artists/:id", jwtAuth, artist)
+app.get("/user/:id", jwtAuth, user)
 
 // user routes
 app.get("/api/users", jwtAuth, authorizeAdmin, getUsers);

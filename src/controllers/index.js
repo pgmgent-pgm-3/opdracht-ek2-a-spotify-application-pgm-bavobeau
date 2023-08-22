@@ -3,6 +3,7 @@ import { playlists } from "./playlists.js";
 import { playlist } from "./playlists.js";
 import { artists } from "./artist.js";
 import { artist } from "./artist.js";
+import { user } from "./user.js";
 
 export {
   home,
@@ -10,4 +11,5 @@ export {
   playlist,
   artists,
   artist,
+  user,
 }

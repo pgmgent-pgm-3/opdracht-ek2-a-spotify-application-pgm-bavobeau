@@ -4,19 +4,21 @@ import data from "../data.js";
 export const playlists = async (req, res) => {
   // repo is een object dat de CRUD operaties bevat
   const playlistRepo = DS.getRepository("Playlist");
-  const songRepo = DS.getRepository("Song");
-    
+  const userRepo = DS.getRepository("User");
+
   // haal alle items op
   const playlists = await playlistRepo.find();
-  const songs = await songRepo.find({
-    relations: ["playlists"]
+  const user = await userRepo.findOne({
+    relations: ["meta", "role"],
+    where: {
+      id: req.user.id
+    }
   });
   
   res.render("playlists", {
-    user: req.user,
+    user,
     data,
     playlists,
-    songs,
   })
 }
 
@@ -25,7 +27,8 @@ export const playlist = async (req, res) => {
   // repo is een object dat de CRUD operaties bevat
   const playlistRepo = DS.getRepository("Playlist");
   const songRepo = DS.getRepository("Song");
-    
+  const userRepo = DS.getRepository("User");
+
   // haal alle items op
   const playlists = await playlistRepo.find();
   const songs = await songRepo.find({
@@ -37,9 +40,15 @@ export const playlist = async (req, res) => {
       id
     }
   });
+  const user = await userRepo.findOne({
+    relations: ["meta", "role"],
+    where: {
+      id: req.user.id
+    }
+  });
   
   res.render("playlist", {
-    user: req.user,
+    user,
     data,
     playlists,
     songs,

@@ -1,4 +1,5 @@
 <h1>{{ playlist.name }}</h1>
+
 <section class="playlist">
   <ul class="songs songs--playlist">
     <li class="song song--title">
@@ -23,3 +24,7 @@
   </ul>
   {{/if}}
 </section>
+  <h3>Delete Playlist</h3>
+    <button class="button__function button__function--red button__function--icon" onClick="deletePlaylist({{id}})">
+      <img src="/img/icons/delete.svg" alt="trashcan">
+    </button>

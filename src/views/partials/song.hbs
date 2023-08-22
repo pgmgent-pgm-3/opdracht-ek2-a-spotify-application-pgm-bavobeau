@@ -1,5 +1,6 @@
 <li class="list__item list__item--song">
   <h4>{{ name }}</h4>
+  <h4>{{ artist.name }}</h4>
   <h4>2:40</h4>
     {{#if (isEqual role_id 1)}}
       <button class="button__function button__function--red button__function--icon" onClick="deleteSong({{id}})">

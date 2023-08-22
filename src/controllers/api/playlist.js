@@ -121,9 +121,8 @@ export const postSongToPlaylist = async (req, res, next) => {
     if (playlist && song) {
       
       await playlistRepo.save(playlist);
-      res.status(200).json({
-        status: "saved song to playlist."
-      });
+      // Redirect back to the same page if success
+      return res.redirect(req.get('referer'));
     } else {
       res.status(400).json({
         status: "song or playlist not found."
