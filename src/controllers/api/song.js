@@ -41,8 +41,14 @@ export const postSong = async (req, res, next) => {
     const songRepo = DS.getRepository("Song");
 
     //look if song already exists in repo
-    const song = await songRepo.findOneBy({
-      name: req.body.name,
+    const song = await songRepo.findOne({
+      relations: ["artist"],
+      where: {
+        name: req.body.name,
+        artist: {
+          id: req.body.artist_id
+        }
+      }
     });
     // if song exists stop and return existing song
     if (song) {
@@ -52,13 +58,18 @@ export const postSong = async (req, res, next) => {
       });
       // if song doesn't exist add it
     } else {
-      await songRepo.save(req.body);
+      await songRepo.save({
+        name: req.body.name,
+        artist: {
+          id: req.body.artist_id
+        }
+      });
 
       //return success code
       res.status(201).json({
         status: "New song successfully added.",
         song: req.body.name,
-        artist_id: req.body.artist.id,
+        artist_id: req.body.artist_id,
       });
     }
   } catch (e) {
