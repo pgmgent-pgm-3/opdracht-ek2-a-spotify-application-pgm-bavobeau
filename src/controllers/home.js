@@ -24,7 +24,9 @@ export const home = async (req, res) => {
     }
   });
   const playlists = await playlistRepo.find();
-  const songs = await songRepo.find();
+  const songs = await songRepo.find({
+    relations: ["artist"]
+  });
   const artists = await artistRepo.find();
   const albums = await albumRepo.find({
     relations: ["artist"]

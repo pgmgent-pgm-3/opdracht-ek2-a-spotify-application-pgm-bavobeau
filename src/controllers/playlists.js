@@ -32,10 +32,10 @@ export const playlist = async (req, res) => {
   // haal alle items op
   const playlists = await playlistRepo.find();
   const songs = await songRepo.find({
-    relations: ["playlists"]
+    relations: ["playlists", "artist"]
   });
   const playlist = await playlistRepo.findOne({
-    relations: ["songs"],
+    relations: ["songs", "songs.artist"],
     where: {
       id
     }

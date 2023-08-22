@@ -1,11 +1,11 @@
-<li class="song song--add">
+<li class="list__item">
   {{#if (isNotEqual playlist_id playlists.0.id )}}
   <h4>{{ name }}</h4>
   <h4>{{ artist.name }}</h4>
   <h4>2:40</h4>
     <form action="/api/playlist/addSong" method="post">
-      <input name="id" value="{{playlist_id}}" class="input--hidden">
-      <input name="songId" value="{{id}}" class="input--hidden">
+      <input name="id" value="{{playlist_id}}" class="hidden">
+      <input name="songId" value="{{id}}" class="hidden">
       <input type="submit" value="Add Song to playlist">
     </form>
   {{/if}}

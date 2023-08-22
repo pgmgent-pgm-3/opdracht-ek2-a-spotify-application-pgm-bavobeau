@@ -54,3 +54,74 @@ function deleteAlbum(id) {
   })
   .catch((e) => console.log(e));
 }
+
+function deletePlaylist(id) {
+  const data = {
+    id: id
+  }
+  fetch("/api/playlist", {
+    method: "delete",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data)
+  })
+  .then((res) => {
+    if(res.ok) {
+      window.location.href = "/playlists";
+    }
+  })
+  .catch((e) => console.log(e));
+}
+
+function updatePlaylist(id) {
+  const newName = document.getElementById("PlaylistNameInput").value;
+  const data = {
+    id: id,
+    name: newName
+  };
+  console.log(newName)
+  fetch("/api/playlist", {
+    method: "put",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data)
+  })
+  .then((res) => {
+    if (res.ok) {
+      window.location.reload(); // Reload the page after successful update
+    } else {
+      // Handle error cases here
+    }
+  })
+  .catch((e) => {
+    console.log(e);
+  });
+}
+
+function updateArtist(id) {
+  const newName = document.getElementById("ArtistNameInput").value;
+  const data = {
+    id: id,
+    name: newName
+  };
+  console.log(newName)
+  fetch("/api/artist", {
+    method: "put",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data)
+  })
+  .then((res) => {
+    if (res.ok) {
+      window.location.reload(); // Reload the page after successful update
+    } else {
+      // Handle error cases here
+    }
+  })
+  .catch((e) => {
+    console.log(e);
+  });
+}

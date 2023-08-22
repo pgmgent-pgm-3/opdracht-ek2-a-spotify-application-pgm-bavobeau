@@ -80,6 +80,19 @@
   gap: 10px ;
 }
 
+.button {
+  border: none;
+  background-color: #191414;
+  border-radius: 100%;
+  min-width: 50px;
+  min-height: 50px;
+  margin-right: 10px;
+}
+
+.rotate180 {
+  transform: rotate(180deg);
+}
+
 .user__avatar {
   width: 50px;
   height: auto;
@@ -95,7 +108,42 @@
   color: hsl(0, 0%, 100%);
 }
 
+.nav__list {
+  margin: 0 0 50px 0;
+}
+
+.nav__item:hover .nav__link {
+  color: blue;
+}
+
+.nav__link {
+  text-decoration: none;
+  font-size: 2rem;
+  color: white;
+}
+
+.nav__link img {
+  filter: invert(100%);
+}
+
+.sidebar__playlists a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.5rem;
+  line-height: 1.5;
+  padding-left: 10px;
+}
+
+.sidebar__item {
+  list-style: circle;
+}
+
+.sidebar__item:hover a {
+  color: blue;
+}
+
 /* main */
 .main-container {
   background: linear-gradient(0deg, hsl(309, 21%, 18%)  60%, hsl(322, 100%, 83%) 100%);
+  padding: 25px;
 }

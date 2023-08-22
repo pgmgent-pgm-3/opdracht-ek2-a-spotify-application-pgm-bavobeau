@@ -1,9 +1,12 @@
 <section>
-  <ul>
+  <h1>Playlists</h1>
+  <ul class="list">
     {{#each playlists}}
-      <li>
+      <li class="list__item">
         <a href="/playlists/{{id}}">
+          <h4>
           {{ name }}
+          </h4> 
         </a>
       </li>
     {{/each}}

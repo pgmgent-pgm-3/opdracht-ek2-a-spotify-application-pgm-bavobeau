@@ -1,12 +1,12 @@
 <li>
-  <a href="/{{card}}/{{id}}">
-    <p>
+  <a class="list__item" href="/{{card}}/{{id}}">
+    <h4>
       {{ name }}
-    </p>
+    </h4>
     {{#if (isEqual card "albums") }}
-    <p>
+    <h4>
       {{ artist.name }}
-    </p>
+    </h4>
     {{/if}}
   </a>
 </li>

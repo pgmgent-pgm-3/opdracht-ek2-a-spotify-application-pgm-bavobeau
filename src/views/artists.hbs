@@ -1,12 +1,8 @@
 <section class="artists">
   <h1>Artists</h1>
-  <ul>
+  <ul class="list">
     {{#each artists}}
-      <li>
-        <a href="/artists/{{id}}">
-          {{ name }}
-        </a>
-      </li>
+      {{>card card="artists"}}
     {{/each}}
   </ul>
 </section>

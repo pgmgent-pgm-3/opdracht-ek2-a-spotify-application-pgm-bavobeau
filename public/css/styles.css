@@ -1,2 +1,31 @@
-// import other css styles
+.home {
+  color: white;
+}
 
+main h1, main h2, main h3, main h4 {
+  color: white;
+}
+
+main h1, main h2, main h3 {
+  text-decoration: underline;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.list__item, .list__item a {
+  color: white;
+  text-decoration: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.list__item:hover h4 {
+  color: blue;
+}
+
+.hidden {
+  display: none;
+}

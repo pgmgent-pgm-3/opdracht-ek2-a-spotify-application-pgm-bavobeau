@@ -1,22 +1,23 @@
 <h1>{{ playlist.name }}</h1>
 
 <section class="playlist">
-  <ul class="songs songs--playlist">
-    <li class="song song--title">
-      <h4>Title</h4>
-      <h4>Artist</h4>
-      <h4>Duration</h4>
+  <ul class="list">
+    <li class="list__item">
+      <h3>Title</h3>
+      <h3>Artist</h3>
+      <h3>Duration</h3>
     </li>
     {{#each playlist.songs }}
       {{> song role_id=../user.role.id playlist_id=../playlist.id }}
     {{/each}}
   </ul>
   {{#if (isEqual user.role.id 1)}}
-  <ul class="songs songs--add">
-    <li class="song song--title">
-      <h4>Title</h4>
-      <h4>Artist</h4>
-      <h4>Duration</h4>
+  <h2>Add songs to playlist</h2>
+  <ul class="list">
+    <li class="list__item">
+      <h3>Title</h3>
+      <h3>Artist</h3>
+      <h3>Duration</h3>
     </li>
     {{#each songs }}
       {{> addSong playlist_id=../playlist.id }}
@@ -24,9 +25,16 @@
   </ul>
   {{/if}}
 </section>
+  {{#if (isSmall user.role.id 2)}}
+  <h3>Change Playlist Name</h3>
+    <input type="text" name="name" value="{{playlist.name}}" id="PlaylistNameInput">
+    <button class="button__function button__function--red button__function--icon" onClick="updatePlaylist({{playlist.id}})">
+      <img src="/img/icons/edit.svg" alt="edit">
+    </button>
+  {{/if}}
   {{#if (isEqual user.role.id 1)}}
   <h3>Delete Playlist</h3>
-    <button class="button__function button__function--red button__function--icon" onClick="deletePlaylist({{id}})">
+    <button class="button__function button__function--red button__function--icon" onClick="deletePlaylist({{playlist.id}})">
       <img src="/img/icons/delete.svg" alt="trashcan">
     </button>
   {{/if}}
