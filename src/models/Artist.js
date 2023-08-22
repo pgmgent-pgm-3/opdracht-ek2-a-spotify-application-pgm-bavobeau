@@ -22,9 +22,9 @@ export default new EntitySchema({
       inverseSide: "artist",
       cascade: true
     },
-    song: {
+    songs: {
       target: "Song",
-      type: "one-to-one",
+      type: "one-to-many",
       inverseSide: "artist",
       cascade: true
     }

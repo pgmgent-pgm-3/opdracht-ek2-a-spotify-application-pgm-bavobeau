@@ -1,0 +1,19 @@
+<section class="artists">
+  <h1>Artists</h1>
+  <ul>
+    {{#each artists}}
+      <li>
+        <a href="/artists/{{id}}">
+          {{ name }}
+        </a>
+      </li>
+    {{/each}}
+  </ul>
+</section>
+<section class="artists__crud">
+  <h3>Create new Artist</h3>
+    <form action="/api/artist" method="post">
+      <input type="text" name="name">
+      <input type="submit">
+    </form>
+</section>

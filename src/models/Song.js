@@ -18,8 +18,8 @@ export default new EntitySchema({
   relations: {
     artist: {
       target: "Artist",
-      type: "one-to-one",
-      inverseSide: "song",
+      type: "many-to-one",
+      inverseSide: "songs",
       joinColumn: {
         name: "artist_id"
       },

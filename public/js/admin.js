@@ -16,3 +16,15 @@ function deleteSongFromPlaylist(songId, playlistId) {
   })
   .catch((error) => console.log(error));
 }
+
+function deleteArtist(id) {
+  fetch("/api/artist", {
+    method: "delete",
+  })
+  .then((res) => {
+    if(res.ok) {
+      window.location.href = "/artists";
+    }
+  })
+  .catch((e) => console.log(e));
+}

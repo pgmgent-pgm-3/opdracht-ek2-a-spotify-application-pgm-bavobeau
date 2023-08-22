@@ -65,6 +65,7 @@
   align-items: center;
   height: 100%;
   padding: 0 30px;
+  background-color: hsl(322, 100%, 83%);
 }
 
 .header__left {
@@ -96,5 +97,5 @@
 
 /* main */
 .main-container {
-  background: linear-gradient(0deg, rgb(55, 36, 52)  60%, rgb(255, 167, 223) 100%);
+  background: linear-gradient(0deg, hsl(309, 21%, 18%)  60%, hsl(322, 100%, 83%) 100%);
 }

@@ -15,7 +15,7 @@ import HandlebarsHelpers from "./lib/HandlebarsHelpers.js";
 import DataSource from "./lib/DataSource.js";
 
 // import controllers
-import { home } from "./controllers/index.js";
+import { home, playlists, playlist, artists, artist } from "./controllers/index.js";
 
 // import api endpoints
 import { login, register, logout, postLogin, postRegister } from "./controllers/api/authentication.js";
@@ -30,7 +30,6 @@ import registerAuthentication from "./middleware/validation/registerAuthenticati
 import loginAuthentication from "./middleware/validation/loginAuthentication.js";
 import { jwtAuth } from "./middleware/jwtAuth.js";
 import { authorizeAdmin, authorizeEditor } from "./middleware/authorize.js"
-import { playlists } from "./controllers/playlists.js";
 
 // initialize express
 const app = express();
@@ -69,7 +68,10 @@ app.post("/api/login", loginAuthentication, postLogin, login);
 app.get("/logout", logout);
 
 // app routes
-app.get("/playlists/:id", jwtAuth, playlists)
+app.get("/playlists", jwtAuth, playlists)
+app.get("/playlists/:id", jwtAuth, playlist)
+app.get("/artists", jwtAuth, artists)
+app.get("/artists/:id", jwtAuth, artist)
 
 // user routes
 app.get("/api/users", jwtAuth, authorizeAdmin, getUsers);
