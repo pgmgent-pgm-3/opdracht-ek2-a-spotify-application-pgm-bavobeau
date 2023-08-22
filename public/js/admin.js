@@ -36,6 +36,25 @@ function deleteArtist(id) {
   .catch((e) => console.log(e));
 }
 
+function deleteSong(id) {
+  const data = {
+    id: id
+  }
+  fetch("/api/song", {
+    method: "delete",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data)
+  })
+  .then((res) => {
+    if(res.ok) {
+      window.location.reload();
+    }
+  })
+  .catch((e) => console.log(e));
+}
+
 function deleteAlbum(id) {
   const data = {
     id: id

@@ -24,7 +24,7 @@
         <h4>{{ artist.name }}</h4>
         <h4>2:40</h4>
         {{#if (isEqual ../user.role.id 1)}}
-          <button class="button__function button__function--red button__function--icon" onClick="deleteAlbum({{id}})">
+          <button class="button__function button__function--red button__function--icon" onClick="deleteSong({{id}})">
             <img src="/img/icons/delete.svg" alt="trashcan">
           </button>
         {{else}}
@@ -42,7 +42,7 @@
       <img src="/img/icons/edit.svg" alt="edit">
     </button>
   {{/if}}
-  {{#if (isEqual ../user.role.id 1)}}
+  {{#if (isEqual user.role.id 1)}}
   <h3>Create new Song</h3>
     <form action="/api/song" method="post">
       <input type="text" name="name">
