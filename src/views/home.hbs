@@ -1,1 +1,18 @@
-{{>songs}}
+<section class="home">
+  <div class="artists">
+    <h2>Artists</h2>
+    <ul>
+      {{#each artists}}
+        {{>card card="artists"}}
+      {{/each}}
+    </ul>
+  </div>
+  <div class="albums">
+    <h2>Albums</h2>
+    <ul>
+      {{#each albums}}
+        {{>card card="albums"}}
+      {{/each}}
+    </ul>
+  </div>
+</section>

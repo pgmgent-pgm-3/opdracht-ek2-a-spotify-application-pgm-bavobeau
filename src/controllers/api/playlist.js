@@ -103,7 +103,7 @@ export const postSongToPlaylist = async (req, res, next) => {
     const songRepo = DS.getRepository("Song");
 
     const { id } = req.body;
-    const songId = req.body.songs.id;
+    const { songId } = req.body;
     // look if playlist already exists in repo
     const playlist = await playlistRepo.findOne({
       relations: ["songs"],
@@ -130,6 +130,7 @@ export const postSongToPlaylist = async (req, res, next) => {
       });
     }
   } catch (e) {
+    console.log(e)
     res.status(500).json({
       status: "Failed to add song to playlist.",
     });
@@ -143,10 +144,14 @@ export const updatePlaylist = async (req, res, next) => {
     const { id } = req.body;
 
     // look for playlist in repo
-    const playlist = await playlistRepo.findOneBy({
-      id,
+    const playlist = await playlistRepo.findOne({
+      relations: ["songs"],
+      where: {
+        id,
+      }
     });
 
+    console.log(req.body)
     // if playlist exists update it
     if (playlist && id !== undefined) {
       await playlistRepo.save(req.body);
@@ -164,6 +169,7 @@ export const updatePlaylist = async (req, res, next) => {
       });
     }
   } catch (e) {
+    console.log(e)
     res.status(500).json({
       status: "Failed to update playlist.",
     });

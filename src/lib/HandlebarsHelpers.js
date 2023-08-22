@@ -14,4 +14,17 @@ export default {
     return false
   },
   
+  isNotEqual: (data, nr) => {
+    if (data === nr) {
+      return false
+    }
+    return true
+  },
+
+  isEqual4: (a, b, c, d) => {
+    if (a === b && c === d) {
+      return true
+    }
+    return false
+  },
 };

@@ -93,3 +93,8 @@
   padding: 20px;
   color: hsl(0, 0%, 100%);
 }
+
+/* main */
+.main-container {
+  background: linear-gradient(0deg, rgb(55, 36, 52)  60%, rgb(255, 167, 223) 100%);
+}

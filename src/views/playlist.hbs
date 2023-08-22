@@ -1,1 +1,25 @@
-{{ id }}
+<h1>{{ playlist.name }}</h1>
+<section class="playlist">
+  <ul class="songs songs--playlist">
+    <li class="song song--title">
+      <h4>Title</h4>
+      <h4>Artist</h4>
+      <h4>Duration</h4>
+    </li>
+    {{#each playlist.songs }}
+      {{> song role_id=../user.role.id playlist_id=../playlist.id }}
+    {{/each}}
+  </ul>
+  {{#if (isEqual user.role.id 1)}}
+  <ul class="songs songs--add">
+    <li class="song song--title">
+      <h4>Title</h4>
+      <h4>Artist</h4>
+      <h4>Duration</h4>
+    </li>
+    {{#each songs }}
+      {{> addSong playlist_id=../playlist.id }}
+    {{/each}}
+  </ul>
+  {{/if}}
+</section>

@@ -13,6 +13,8 @@ export const home = async (req, res) => {
   const userRepo = DS.getRepository("User");
   const playlistRepo = DS.getRepository("Playlist");
   const songRepo = DS.getRepository("Song");
+  const artistRepo = DS.getRepository("Artist");
+  const albumRepo = DS.getRepository("Album");
 
   // haal alle items op
   const user = await userRepo.findOne({
@@ -23,12 +25,18 @@ export const home = async (req, res) => {
   });
   const playlists = await playlistRepo.find();
   const songs = await songRepo.find();
+  const artists = await artistRepo.find();
+  const albums = await albumRepo.find({
+    relations: ["artist"]
+  });
 
   // render homepage
   res.render("home", {
     data,
     user,
     playlists,
-    songs
+    songs,
+    artists,
+    albums
   });
 };

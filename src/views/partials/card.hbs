@@ -1,0 +1,12 @@
+<li>
+  <a href="/{{card}}/{{id}}">
+    <p>
+      {{ name }}
+    </p>
+    {{#if (isEqual card "albums") }}
+    <p>
+      {{ artist.name }}
+    </p>
+    {{/if}}
+  </a>
+</li>
